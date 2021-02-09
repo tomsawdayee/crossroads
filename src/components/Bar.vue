@@ -29,7 +29,7 @@ export default {
   methods: {
     calcBarWidth(val) {
       const width = Math.max(
-        12,
+        16,
         Math.min((val / (this.max - this.min)) * 100, 100)
       );
       return `calc(${width}% - 6px)`;
@@ -58,7 +58,7 @@ export default {
 }
 
 .bar-fill {
-  border-radius: 13px;
+  border-radius: 15px;
   height: 88%;
   position: absolute;
   top: 50%;
