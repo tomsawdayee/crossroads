@@ -7,6 +7,15 @@
 <script>
 export default {
   name: "App",
+  created() {
+    window.qualities = {
+      relationships: { value: 50, delta: 5 },
+      intelligence: { value: 10, delta: 2 },
+      health: { value: 17, delta: 1 },
+      happiness: { value: 77, delta: 10 },
+      leadership: { value: 4, delta: 2 },
+    };
+  },
 };
 </script>
 
