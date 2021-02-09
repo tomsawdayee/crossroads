@@ -4,7 +4,7 @@
     <span class="stat-item">Energy: {{ user.energy }}<font-awesome-icon :icon="['fas', 'star']"
                                                                         :style="{ marginLeft: '5px',color: '#631878' }"/></span>
     <span class="stat-item">Coins: {{ user.coins }}<font-awesome-icon :icon="['fas', 'coins']"
-                                                                      :style="{ marginLeft: '5px',color: '#D39C2F' }"/></span>
+                                                                    :style="{ marginLeft: '5px',color: '#D39C2F' }"/></span>
     <div class="decision-container">
       <div class="decision-badge">
         <div class="cost-wrap">
@@ -52,6 +52,23 @@
         <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
       </button>
     </div>
+
+    <div id="top-scores">
+        <div class= "top-users-title">
+          Top Users
+        </div>
+        <ul>
+          <li v-for="topUser in topUsers" :key="topUser.id">
+
+             {{ "Name : " + topUser.name}}
+             <font-awesome-icon :icon="['fas', 'star']" :style="{ marginRight: '2px', color: '#631878' }"/>
+             {{" Energy: " + topUser.energy}}
+             {{" Coins: " + topUser.coins }}
+             <font-awesome-icon :icon="['fas', 'coins']"
+                                 :style="{ marginRight: '2px', color: '#D39C2F' }"/>
+            </li>
+        </ul>
+    </div>
   </div>
 </template>
 
@@ -89,6 +106,10 @@ export default {
     return {
       user: {energy: 77, coins: 100, physicalHealth: 50, relationships: 50, intelligence: 50, leadership: 50, happiness: 50},
       currentIndex: 0,
+      topUsers: [
+          { id: "user1", name : "Eitan", energy: 95, coins: 1010},
+          { id: "user2", name : "Yulia", energy: 90, coins: 953}
+      ],
       decisions: [
         {
           id: '1',
@@ -168,6 +189,15 @@ export default {
 #action-container {
   text-align: center;
   margin-top:15px;
+}
+
+#top-users {
+  text-align: center;
+  margin-top:15px;
+}
+
+.top-users-title {
+  text-align: left;
 }
 
 .stat-item {
