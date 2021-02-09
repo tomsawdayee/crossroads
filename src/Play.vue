@@ -44,7 +44,9 @@
     </div>
 
     <div class="game-over" v-if="this.gameEnded && !this.showProfile">
-      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver"/>
+      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.DECISIONS"/>
+      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.ENERGY"/>
+      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.COINS"/>
       <div class="decision-description">{{ "" }}</div>
     </div>
 
@@ -84,7 +86,7 @@ export default {
       //game over two option image
       //youre too tired in order to continue
       //the decisions for today are over
-      //if (enough energy) end game
+      //if (enough energy) end game DONE
       //add swipe
 
       if(decision) {
@@ -95,11 +97,26 @@ export default {
         this.user.happiness.delta += decision.effect.happiness || 0
         this.user.intelligence.delta += decision.effect.intelligence || 0
         this.user.leadership.delta += decision.effect.leadership || 0
+        this.user.relationships.delta += decision.effect.relationships || 0
 
         this.currentIndex++
       }
-      //The end
-      this.gameEnded = this.currentIndex === this.decisions.length
+
+      if(this.currentIndex === this.decisions.length) {
+        this.gameEnded = true
+        this.reasonForEnd = this.reasonForEndOptions.DECISIONS
+      }
+
+      if(this.user.energy === 0) {
+        this.gameEnded = true
+        this.reasonForEnd = this.reasonForEndOptions.ENERGY
+      }
+
+      if(this.user.coins === 0) {
+        this.gameEnded = true
+        this.reasonForEnd = this.reasonForEndOptions.COINS
+      }
+
       if(this.gameEnded){
         window.qualities = this.user
       }
@@ -139,12 +156,18 @@ export default {
       currentIndex: 0,
       gameEnded: false,
       showProfile:false,
+      reasonForEnd: "",
+      reasonForEndOptions: {
+        DECISIONS: "DECISIONS",
+        ENERGY: "ENERGY",
+        COINS: "COINS"
+      },
       decisions: [
         {
           id: '1',
           description: 'Asaf needs help with his homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
-          cost: {energy: 3},
+          cost: {energy: 7},
           effect: {relationships: 2}
         },
         {
@@ -152,28 +175,28 @@ export default {
           description: 'Would you like to open a Lemonade stand?',
           canPostpone: true,
           imageUrl: './assets/lemonadeStand.jpg',
-          cost: {coins: 3, energy: 3},
+          cost: {coins: 3, energy: 10},
           effect: {relationships: 2, happiness: 2}
         },
         {
           id: '3',
           description: 'Your Grandmother is sick, would you like to visit her?',
           imageUrl: './assets/Grandmother.png',
-          cost: {energy: 3},
+          cost: {energy: 5},
           effect: {happiness: 2, relationships: 2}
         },
         {
           id: '4',
           description: 'Would you like to gather a Team and clean a beach?',
           imageUrl: './assets/cleanBeach.jpg',
-          cost: {energy: 3},
+          cost: {energy: 10},
           effect: {leadership: 3, happiness: 1}
         },
         {
           id: '5',
           description: 'Would you like to go jogging',
           imageUrl: './assets/GoJogging.jpg',
-          cost: {energy: 3},
+          cost: {energy: 10},
           effect: {health: 3}
         },
         {
@@ -187,7 +210,7 @@ export default {
           id: '7',
           description: 'How about going to the university?',
           imageUrl: './assets/GoToUniversity.jpg',
-          cost: {coins: 1, energy: 3},
+          cost: {coins: 1, energy: 15},
           effect: {intelligence: 10, happiness: 1, relationships: 2}
         }
       ]
