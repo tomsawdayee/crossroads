@@ -51,15 +51,24 @@
     </div>
 
     <div id="action-container" v-if="!this.gameEnded">
-      <button id="postpone-button" v-on:click="decide('postpone')" class="action-button" v-if="renderedItem.canPostpone">
+      <div>
+        <button id="postpone-button" v-on:click="decide('postpone')" class="action-button" v-if="renderedItem.canPostpone">
         <font-awesome-icon size="3x" :icon="['fas', 'hourglass-half']" :style="{ color: 'white' }" />
       </button>
-      <button id="reject-button" v-on:click="decide('no')" class="action-button">
+      </div>
+      <div>
+        <button id="reject-button" v-on:click="decide('no')" class="action-button">
         <font-awesome-icon size="3x" :icon="['fas', 'times']" :style="{ color: 'white' }"/>
       </button>
-      <button id="accept-button" v-on:click="decide('yes')" class="action-button">
+      </div>
+      <div>
+        <button id="accept-button" v-on:click="decide('yes')" class="action-button">
         <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
       </button>
+      </div>
+      <div>
+        <!-- future button -->
+      </div>
     </div>
 
     <Profile v-if="this.showProfile"></Profile>
@@ -305,6 +314,9 @@ body {
 #action-container {
   text-align: center;
   margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
 }
 
 #top-users {
@@ -337,12 +349,14 @@ body {
 
 .action-button#reject-button {
   background-color: #B70F0A;
-  margin-right: 20px;
 }
 
 .action-button#postpone-button {
-  background-color: #0000FF;
-  margin-right: 20px;
+  background-color: #174bda;
+  width: 60px;
+  height: 60px;
+  font-size: 0.4rem;
+  border-width: 6px;
 }
 
 .decision-badge {
