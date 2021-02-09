@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Qualities</h1>
+    <h2 id="qualities-header">My Qualities</h2>
     <div class="qualities-grid">
       <div class="quality-label">Relationships</div>
       <Bar
@@ -38,6 +38,8 @@
         :delta="qualities.happiness.delta"
       ></Bar>
     </div>
+    <h2 id="trophies-header">My Trophies</h2>
+    <div class="trophies-cabinet">Soon enough I'll have my first trophy!</div>
   </div>
 </template>
 
@@ -72,6 +74,10 @@ export default {
 </script>
 
 <style>
+#qualities-header {
+  margin-bottom: 8px;
+}
+
 .qualities-grid {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -79,6 +85,9 @@ export default {
   row-gap: 6px;
   align-items: center;
   justify-items: start;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 16px 8px;
 }
 
 .quality {
@@ -88,5 +97,17 @@ export default {
 
 .quality-label {
   margin-right: 10px;
+}
+
+#trophies-header {
+  margin-bottom: 8px;
+}
+
+.trophies-cabinet {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 20px 8px;
+  color: grey;
+  font-style: italic;
 }
 </style>

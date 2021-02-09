@@ -11,7 +11,13 @@
       :style="{ width: calcBarWidth(value) }"
     ></div>
     <div class="bar-value">
-      {{ +value + +delta }}
+      {{ Math.max(+min, Math.min(+max, +value + +delta)) }}
+    </div>
+    <div v-if="delta < 0" class="bar-delta negative-delta">
+      {{ delta }}
+    </div>
+    <div v-if="delta > 0" class="bar-delta positive-delta">
+      +{{ delta }}
     </div>
   </div>
 </template>
@@ -53,7 +59,7 @@ export default {
 
 .bar-fill {
   border-radius: 13px;
-  height: 90%;
+  height: 88%;
   position: absolute;
   top: 50%;
   left: 3px;
@@ -134,5 +140,23 @@ export default {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.bar-delta {
+  color: white;
+  text-shadow: 1px 1px 3px #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  right: 8px;
+  transform: translate(0, 0);
+}
+
+.negative-delta {
+  color: rgb(255, 136, 136);
+}
+
+.positive-delta {
+  color: rgb(195, 255, 117);
 }
 </style>
