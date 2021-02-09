@@ -80,10 +80,6 @@ import Profile from "./views/Profile.vue";
 
 //check an option of delay between decisions
 //greater weights
-//shorter page
-//game over two option image
-//youre too tired in order to continue
-//the decisions for today are over
 //add swipe
 
 export default {
@@ -300,7 +296,7 @@ body {
 .decision-container .decision-image {
   width: 100%;
   border-radius: 10px;
-  height: 320px;
+  height: 300px;
   object-fit: cover;
 }
 
