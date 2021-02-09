@@ -1,10 +1,20 @@
 <template>
   <div id="app">
+    <div id="header">
+      <div class="logo-wrap">
+        <img :src="require('./assets/crossroads-upper-header-color.png')" width="300px"/>
+      </div>
+      <div>
+        <img :src="require('./assets/asaf.png')" width="60px" id="profile-image"/>
+        <span class="stat-wrap">
+          <span class="stat-item">{{ user.energy }}<font-awesome-icon :icon="['fas', 'star']"
+                                                                              :style="{ marginLeft: '5px',color: '#631878' }"/></span>
+          <span class="stat-item">{{ user.coins }}<font-awesome-icon :icon="['fas', 'coins']"
+                                                                            :style="{ marginLeft: '5px',color: '#D39C2F' }"/></span>
+        </span>
+      </div>
+    </div>
 
-    <span class="stat-item">Energy: {{ user.energy }}<font-awesome-icon :icon="['fas', 'star']"
-                                                                        :style="{ marginLeft: '5px',color: '#631878' }"/></span>
-    <span class="stat-item">Coins: {{ user.coins }}<font-awesome-icon :icon="['fas', 'coins']"
-                                                                    :style="{ marginLeft: '5px',color: '#D39C2F' }"/></span>
     <div class="decision-container">
       <div class="decision-badge">
         <div class="cost-wrap">
@@ -43,8 +53,8 @@ export default {
     approve: function (event) {
       let index = this.currentIndex
       const decision = this.decisions[index]
-      this.user.energy += decision.cost.energy || 0
-      this.user.coins += decision.cost.coins || 0
+      this.user.energy -= decision.cost.energy || 0
+      this.user.coins -= decision.cost.coins || 0
 
       //This should occur in the backend
       this.user.physicalHealth += decision.effect.physicalHealth || 0
@@ -67,9 +77,17 @@ export default {
   // Relationships (R), Intelligence (I), PhysicalHealth (P)
   // Leadership (L), Happiness (H) Resources: Energy, Coins
 
-  data () {
+  data() {
     return {
-      user: {energy: 77, coins: 100, physicalHealth: 50, relationships: 50, intelligence: 50, leadership: 50, happiness: 50},
+      user: {
+        energy: 77,
+        coins: 100,
+        physicalHealth: 50,
+        relationships: 50,
+        intelligence: 50,
+        leadership: 50,
+        happiness: 50
+      },
       currentIndex: 0,
       decisions: [
         {
@@ -155,12 +173,12 @@ export default {
 
 #action-container {
   text-align: center;
-  margin-top:15px;
+  margin-top: 15px;
 }
 
 #top-users {
   text-align: center;
-  margin-top:15px;
+  margin-top: 15px;
 }
 
 .top-users-title {
@@ -189,8 +207,8 @@ export default {
 }
 
 .decision-badge {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background: #F7F6F6;
   position: absolute;
   right: 20px;
@@ -200,12 +218,30 @@ export default {
 }
 
 .cost-wrap {
-  font-size: 14px;
-  margin-top: 12px;
+  font-size: 16px;
+  margin-top: 14px;
 }
 
 .cost-container {
   margin-bottom: 3px;
+}
+
+.stat-wrap {
+  text-align: left;
+  font-size:22px;
+}
+
+#header {
+  text-align: left;
+}
+
+#profile-image {
+  border-radius: 50%;
+  margin-right:10px;
+}
+
+.logo-wrap {
+  text-align: center;
 }
 
 </style>
