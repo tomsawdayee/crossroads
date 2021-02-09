@@ -10,7 +10,6 @@
     />
     <div id="header">
       <div class="logo-wrap">
-<!--        <img :src="require('./assets/crossroads-upper-header-color.png')" width="300px"/>-->
         <h1 class="header-title">CROSSROADS</h1>
         <h3 class="header-sub-title">Round #1</h3>
       </div>
@@ -52,13 +51,17 @@
         <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
       </button>
     </div>
+
+    <Profile></Profile>
   </div>
 </template>
 
 <script>
+import Profile from "./views/Profile.vue";
 
 export default {
   name: 'Play',
+  components: {Profile},
   methods: {
     approve: function (event) {
       let index = this.currentIndex
@@ -66,7 +69,6 @@ export default {
       this.user.energy -= decision.cost.energy || 0
       this.user.coins -= decision.cost.coins || 0
 
-      //This should occur in the backend
       this.user.physicalHealth += decision.effect.physicalHealth || 0
       this.user.happiness += decision.effect.happiness || 0
       this.user.intelligence += decision.effect.intelligence || 0
@@ -83,9 +85,9 @@ export default {
       return this.decisions[index]
     }
   },
-  mounted(){
+  mounted () {
     setTimeout(() => {
-      this.showSplash = false;
+      this.showSplash = false
     }, 3000)
   },
 
