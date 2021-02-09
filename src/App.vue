@@ -12,10 +12,10 @@ export default {
 
 <style>
 #app {
-  width: 400px;
-  margin: 50px auto 0;
+  max-width: 450px;
+  margin: 0 auto;
 
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

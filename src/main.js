@@ -6,6 +6,7 @@ import router from "./router";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faCheck, faTimes, faStar, faCoins, faHeartbeat, faBrain, faUsers} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueSplash from 'vue-splash';
 
 library.add(faUserSecret)
 library.add(faCheck)
@@ -17,6 +18,7 @@ library.add(faBrain)
 library.add(faUsers)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.use(VueSplash);
 
 Vue.config.productionTip = false
 

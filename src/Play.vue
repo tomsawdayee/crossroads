@@ -1,8 +1,18 @@
 <template>
-  <div id="app">
+  <div>
+    <vue-splash
+      class="splash"
+      :show="showSplash"
+      :logo="require('./assets/crossroads.png')"
+      color="#00bfa5"
+      :size="300"
+      :fixed="true"
+    />
     <div id="header">
       <div class="logo-wrap">
-        <img :src="require('./assets/crossroads-upper-header-color.png')" width="300px"/>
+<!--        <img :src="require('./assets/crossroads-upper-header-color.png')" width="300px"/>-->
+        <h1 class="header-title">CROSSROADS</h1>
+        <h3 class="header-sub-title">Round #1</h3>
       </div>
       <div class="profile-wrap">
         <img :src="require('./assets/asaf.png')" width="60px" id="profile-image"/>
@@ -73,12 +83,18 @@ export default {
       return this.decisions[index]
     }
   },
+  mounted(){
+    setTimeout(() => {
+      this.showSplash = false;
+    }, 3000)
+  },
 
   // Relationships (R), Intelligence (I), PhysicalHealth (P)
   // Leadership (L), Happiness (H) Resources: Energy, Coins
 
   data () {
     return {
+      showSplash: true,
       user: {energy: 77, coins: 100, physicalHealth: 50, relationships: 50, intelligence: 50, leadership: 50, happiness: 50},
       currentIndex: 0,
       decisions: [
@@ -86,7 +102,7 @@ export default {
           id: '1',
           description: 'Asaf needs help with his homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
-          cost: {coins: 2, energy: 3},
+          cost: {energy: 3},
           effect: {relationships: 2}
         },
         {
@@ -131,29 +147,44 @@ export default {
 </script>
 
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0 10px;
+}
 .decision-container {
   list-style-type: none;
-  padding: 0px;
-  border: 1px solid black;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 10px;
   background: #F7F6F6;
   position: relative;
-  margin-top: 15px;
+  margin-top: 25px;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
 
 .decision-container .decision-description {
-  margin: 20px 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 28px;
+  padding: 5px;
+  font-size: 1.2rem;
 }
 
 .decision-container .decision-image {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
+  height: 380px;
+  object-fit: cover;
 }
 
 #action-container {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 #top-users {
@@ -171,10 +202,12 @@ export default {
 
 .action-button {
   border: none;
-  height: 60px;
-  width: 60px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
   outline: none;
+  border: 10px solid #F7F6F6;
+  border-style: double;
 }
 
 .action-button#accept-button {
@@ -187,12 +220,12 @@ export default {
 }
 
 .decision-badge {
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
   background: #F7F6F6;
   position: absolute;
-  right: 20px;
-  top: -25px;
+  right: 30px;
+  top: -35px;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
@@ -201,7 +234,7 @@ export default {
 }
 
 .cost-wrap {
-  font-size: 16px;
+  font-size: 22px;
 }
 
 .cost-container {
@@ -229,5 +262,20 @@ export default {
 .profile-wrap {
   display: flex;
   align-items: center;
+  margin-top:15px;
+}
+
+.splash {
+  z-index: 1;
+}
+
+.header-title {
+  color: #6CB1A4;
+  margin: 5px;
+}
+
+.header-sub-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>
