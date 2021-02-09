@@ -296,7 +296,7 @@ body {
 .decision-container .decision-image {
   width: 100%;
   border-radius: 10px;
-  height: 300px;
+  height: 320px;
   object-fit: cover;
 }
 
