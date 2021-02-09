@@ -69,7 +69,6 @@
 <script>
 import Profile from "./views/Profile.vue";
 
-//check enough energy/enough money
 //check an option of delay between decisions
 //greater weights
 //shorter page
@@ -87,11 +86,13 @@ export default {
         this.processDecision(answer);
       }
 
-      this.currentIndex++
+      const nextIndex = this.getNextActionIndex(this.currentIndex);
 
-      if (this.currentIndex === this.decisions.length) {
+      if (nextIndex >= this.decisions.length) {
         this.gameEnded = true;
         this.reasonForEnd = this.reasonForEndOptions.DECISIONS;
+      } else {
+        this.currentIndex = nextIndex;
       }
 
       if (this.user.energy === 0) {
@@ -129,6 +130,22 @@ export default {
         this.user.relationships.delta += effect.relationships || 0;
         this.user.revenues += effect.coins || 0;
       }
+    },
+    getNextActionIndex(currentIndex) {
+      let idx = currentIndex;
+      idx++;
+      while (idx < this.decisions.length) {
+        const cost = this.decisions[idx].cost;
+        const energyNeeded = cost.energy || 0;
+        const coinsNeeded = cost.coins || 0;
+        const currentEnergy = this.user.energy.value - this.user.energy.delta;
+        const currentCoins = this.user.coins.value - this.user.coins.delta;
+        if ((currentCoins >= coinsNeeded) && (currentEnergy >= energyNeeded)) {
+          break;
+        }
+        idx++;
+      }
+      return idx;
     },
     gameOver: function (event) {
       this.showProfile = true
