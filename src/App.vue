@@ -4,7 +4,7 @@
       <div class="logo-wrap">
         <img :src="require('./assets/crossroads-upper-header-color.png')" width="300px"/>
       </div>
-      <div>
+      <div class="profile-wrap">
         <img :src="require('./assets/asaf.png')" width="60px" id="profile-image"/>
         <span class="stat-wrap">
           <span class="stat-item">{{ user.energy }}<font-awesome-icon :icon="['fas', 'star']"
@@ -94,7 +94,7 @@ export default {
           id: '1',
           description: 'Asaf needs help with his homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
-          cost: {coins: 2, energy: 3},
+          cost: {coins: 2, energy: 4},
           effect: {relationships: 2}
         },
         {
@@ -215,11 +215,13 @@ export default {
   top: -25px;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cost-wrap {
   font-size: 16px;
-  margin-top: 14px;
 }
 
 .cost-container {
@@ -242,6 +244,11 @@ export default {
 
 .logo-wrap {
   text-align: center;
+}
+
+.profile-wrap {
+  display: flex;
+  align-items: center;
 }
 
 </style>
