@@ -8,15 +8,35 @@
     <div class="decision-container">
       <div class="decision-badge">
         <div class="cost-wrap">
-          <div v-if="renderedItem.cost.energy > 0" class="cost-container">
+          <div v-if="renderedItem.effect.energy" class="cost-container">
             <font-awesome-icon :icon="['fas', 'star']"
                                :style="{ marginRight: '2px', color: '#631878' }"/>
-            <span>{{ renderedItem.cost.energy }}</span>
+            <span>{{ renderedItem.effect.energy }}</span>
           </div>
-          <div v-if="renderedItem.cost.coins > 0" class="cost-container">
+          <div v-if="renderedItem.effect.coins" class="cost-container">
             <font-awesome-icon :icon="['fas', 'coins']"
                                :style="{ marginRight: '2px', color: '#D39C2F' }"/>
-            <span>{{ renderedItem.cost.coins }}</span>
+            <span>{{ renderedItem.effect.coins }}</span>
+          </div>
+          <div v-if="renderedItem.effect.physicalHealth" class="cost-container">
+            <font-awesome-icon :icon="['fas', 'heartbeat']"
+                               :style="{ marginRight: '2px', color: '#FF0707' }"/>
+            <span>{{ renderedItem.effect.physicalHealth }}</span>
+          </div>
+          <div v-if="renderedItem.effect.happiness" class="cost-container">
+            <font-awesome-icon :icon="['fas', 'heartbeat']"
+                               :style="{ marginRight: '2px', color: '#FF0707' }"/>
+            <span>{{ renderedItem.effect.happiness }}</span>
+          </div>
+          <div v-if="renderedItem.effect.intelligence" class="cost-container">
+            <font-awesome-icon :icon="['fas', 'brain']"
+                               :style="{ marginRight: '2px', color: '#FF0707' }"/>
+            <span>{{ renderedItem.effect.intelligence }}</span>
+          </div>
+          <div v-if="renderedItem.effect.leadership" class="cost-container">
+            <font-awesome-icon :icon="['fas', 'users']"
+                               :style="{ marginRight: '2px', color: '#631878' }"/>
+            <span>{{ renderedItem.effect.leadership }}</span>
           </div>
         </div>
       </div>
@@ -43,8 +63,12 @@ export default {
     approve: function (event) {
       let index = this.currentIndex
       const decision = this.decisions[index]
-      this.user.energy -= decision.cost.energy
-      this.user.coins -= decision.cost.coins
+      this.user.energy += decision.effect.energy || 0
+      this.user.coins += decision.effect.coins || 0
+      this.user.physicalHealth += decision.effect.physicalHealth || 0
+      this.user.happiness += decision.effect.happiness || 0
+      this.user.intelligence += decision.effect.intelligence || 0
+      this.user.leadership += decision.effect.leadership || 0
       this.currentIndex++
     },
     reject: function (event) {
@@ -57,30 +81,50 @@ export default {
       return this.decisions[index]
     }
   },
+
+  // Relationships (R), Intelligence (I), PhysicalHealth (P)
+  // Leadership (L), Happiness (H) Resources: Energy, Coins
+
   data () {
     return {
-      user: {energy: 77, coins: 100},
+      user: {energy: 77, coins: 100, physicalHealth: 50, relationships: 50, intelligence: 50, leadership: 50, happiness: 50},
       currentIndex: 0,
       decisions: [
         {
           id: '1',
           description: 'Asaf needs help with his homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
-          cost: {coins: 2, energy: 4}
+          effect: {relationships: 2, energy: -3}
         },
         {
           id: '2',
-          isVisible: false,
-          description: 'TEST TEXT',
+          description: 'Your Grandmother is sick, would you like to visit her?',
           imageUrl: './assets/Grandmother.png',
-          cost: {coins: 10, energy: 15}
+          effect: {coins: -2, energy: 3}
         },
         {
           id: '3',
-          isVisible: false,
-          description: 'Asaf needs help with his homework in math. Would you like to assist?',
-          imageUrl: './assets/Parenting-Help.jpg',
-          cost: {coins: 2, energy: 4}
+          description: 'Would you like to gather a Team and clean a beach?',
+          imageUrl: './assets/cleanBeach.jpg',
+          effect: {leadership: 3, happiness: 1}
+        },
+        {
+          id: '4',
+          description: 'Would you like to go jogging',
+          imageUrl: './assets/GoJogging.jpg',
+          effect: {physicalHealth: 3, energy: -2}
+        },
+        {
+          id: '5',
+          description: 'Would you like to do meditation',
+          imageUrl: './assets/doMeditation.jpg',
+          effect: {happiness: 3, energy: -2}
+        },
+        {
+          id: '6',
+          description: 'How about going to the university?',
+          imageUrl: './assets/GoToUniversity.jpg',
+          effect: {intelligence: 10, coins: -3}
         }
       ]
     }

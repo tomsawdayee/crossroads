@@ -3,8 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faCheck, faTimes, faStar, faCoins } from '@fortawesome/free-solid-svg-icons'
-
+import { faUserSecret, faCheck, faTimes, faStar, faCoins, faHeartbeat, faBrain, faUsers} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faUserSecret)
@@ -12,6 +11,9 @@ library.add(faCheck)
 library.add(faTimes)
 library.add(faStar)
 library.add(faCoins)
+library.add(faHeartbeat)
+library.add(faBrain)
+library.add(faUsers)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
