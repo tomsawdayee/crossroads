@@ -8,35 +8,15 @@
     <div class="decision-container">
       <div class="decision-badge">
         <div class="cost-wrap">
-          <div v-if="renderedItem.effect.energy" class="cost-container">
+          <div v-if="renderedItem.cost.energy" class="cost-container">
             <font-awesome-icon :icon="['fas', 'star']"
                                :style="{ marginRight: '2px', color: '#631878' }"/>
-            <span>{{ renderedItem.effect.energy }}</span>
+            <span>{{ renderedItem.cost.energy }}</span>
           </div>
-          <div v-if="renderedItem.effect.coins" class="cost-container">
+          <div v-if="renderedItem.cost.coins" class="cost-container">
             <font-awesome-icon :icon="['fas', 'coins']"
                                :style="{ marginRight: '2px', color: '#D39C2F' }"/>
-            <span>{{ renderedItem.effect.coins }}</span>
-          </div>
-          <div v-if="renderedItem.effect.physicalHealth" class="cost-container">
-            <font-awesome-icon :icon="['fas', 'heartbeat']"
-                               :style="{ marginRight: '2px', color: '#FF0707' }"/>
-            <span>{{ renderedItem.effect.physicalHealth }}</span>
-          </div>
-          <div v-if="renderedItem.effect.happiness" class="cost-container">
-            <font-awesome-icon :icon="['fas', 'heartbeat']"
-                               :style="{ marginRight: '2px', color: '#FF0707' }"/>
-            <span>{{ renderedItem.effect.happiness }}</span>
-          </div>
-          <div v-if="renderedItem.effect.intelligence" class="cost-container">
-            <font-awesome-icon :icon="['fas', 'brain']"
-                               :style="{ marginRight: '2px', color: '#FF0707' }"/>
-            <span>{{ renderedItem.effect.intelligence }}</span>
-          </div>
-          <div v-if="renderedItem.effect.leadership" class="cost-container">
-            <font-awesome-icon :icon="['fas', 'users']"
-                               :style="{ marginRight: '2px', color: '#631878' }"/>
-            <span>{{ renderedItem.effect.leadership }}</span>
+            <span>{{ renderedItem.cost.coins }}</span>
           </div>
         </div>
       </div>
@@ -52,23 +32,6 @@
         <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
       </button>
     </div>
-
-    <div id="top-scores">
-        <div class= "top-users-title">
-          Top Users
-        </div>
-        <ul>
-          <li v-for="topUser in topUsers" :key="topUser.id">
-
-             {{ "Name : " + topUser.name}}
-             <font-awesome-icon :icon="['fas', 'star']" :style="{ marginRight: '2px', color: '#631878' }"/>
-             {{" Energy: " + topUser.energy}}
-             {{" Coins: " + topUser.coins }}
-             <font-awesome-icon :icon="['fas', 'coins']"
-                                 :style="{ marginRight: '2px', color: '#D39C2F' }"/>
-            </li>
-        </ul>
-    </div>
   </div>
 </template>
 
@@ -80,8 +43,10 @@ export default {
     approve: function (event) {
       let index = this.currentIndex
       const decision = this.decisions[index]
-      this.user.energy += decision.effect.energy || 0
-      this.user.coins += decision.effect.coins || 0
+      this.user.energy += decision.cost.energy || 0
+      this.user.coins += decision.cost.coins || 0
+
+      //This should occur in the backend
       this.user.physicalHealth += decision.effect.physicalHealth || 0
       this.user.happiness += decision.effect.happiness || 0
       this.user.intelligence += decision.effect.intelligence || 0
@@ -106,46 +71,48 @@ export default {
     return {
       user: {energy: 77, coins: 100, physicalHealth: 50, relationships: 50, intelligence: 50, leadership: 50, happiness: 50},
       currentIndex: 0,
-      topUsers: [
-          { id: "user1", name : "Eitan", energy: 95, coins: 1010},
-          { id: "user2", name : "Yulia", energy: 90, coins: 953}
-      ],
       decisions: [
         {
           id: '1',
           description: 'Asaf needs help with his homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
-          effect: {relationships: 2, energy: -3}
+          cost: {coins: 2, energy: 3},
+          effect: {relationships: 2}
         },
         {
           id: '2',
           description: 'Your Grandmother is sick, would you like to visit her?',
           imageUrl: './assets/Grandmother.png',
-          effect: {coins: -2, energy: 3}
+          cost: {coins: 5, energy: 6},
+          effect: {}
         },
         {
           id: '3',
           description: 'Would you like to gather a Team and clean a beach?',
           imageUrl: './assets/cleanBeach.jpg',
+          cost: {coins: 2, energy: 3},
           effect: {leadership: 3, happiness: 1}
         },
         {
           id: '4',
           description: 'Would you like to go jogging',
           imageUrl: './assets/GoJogging.jpg',
-          effect: {physicalHealth: 3, energy: -2}
+          cost: {coins: 3, energy: 7},
+          effect: {physicalHealth: 3}
         },
         {
           id: '5',
           description: 'Would you like to do meditation',
           imageUrl: './assets/doMeditation.jpg',
-          effect: {happiness: 3, energy: -2}
+          cost: {coins: 2, energy: 7},
+          effect: {happiness: 3}
         },
         {
           id: '6',
           description: 'How about going to the university?',
           imageUrl: './assets/GoToUniversity.jpg',
-          effect: {intelligence: 10, coins: -3}
+          cost: {coins: 1, energy: 6},
+          effect: {intelligence: 10}
         }
       ]
     }
