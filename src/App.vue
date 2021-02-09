@@ -8,6 +8,20 @@
 
     <ul id="decisions-list">
       <li v-for="item in decisions" :key="item.id" v-if="item.isVisible">
+        <div class="decision-badge">
+          <div class="cost-wrap">
+            <div v-if="item.cost.energy > 0" class="cost-container">
+              <font-awesome-icon :icon="['fas', 'star']"
+                                 :style="{ marginRight: '2px', color: '#631878' }"/>
+              <span>{{ item.cost.energy }}</span>
+            </div>
+            <div v-if="item.cost.coins > 0" class="cost-container">
+              <font-awesome-icon :icon="['fas', 'coins']"
+                                 :style="{ marginRight: '2px', color: '#D39C2F' }"/>
+              <span>{{ item.cost.coins }}</span>
+            </div>
+          </div>
+        </div>
         <img :src="require(`${item.imageUrl}`)" class="decision-image"/>
         <div class="decision-description">{{ item.description }}</div>
       </li>
@@ -35,7 +49,7 @@ export default {
       alert('reject clicked')
     }
   },
-  data () {
+  data() {
     return {
       user: {energy: 77, coins: 100},
       decisions: [
@@ -89,6 +103,7 @@ export default {
   padding: 8px;
   border-radius: 5px;
   background: #F7F6F6;
+  position: relative;
 }
 
 #decisions-list .decision-description {
@@ -123,6 +138,26 @@ export default {
 .action-button#reject-button {
   background-color: #B70F0A;
   margin-right: 20px;
+}
+
+.decision-badge {
+  width: 60px;
+  height: 60px;
+  background: #F7F6F6;
+  position: absolute;
+  right: 20px;
+  top: -25px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.cost-wrap {
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.cost-container {
+  margin-bottom:3px;
 }
 
 </style>
