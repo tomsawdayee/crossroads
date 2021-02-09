@@ -44,9 +44,9 @@
     </div>
 
     <div class="game-over" v-if="this.gameEnded && !this.showProfile">
-      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.DECISIONS"/>
-      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.ENERGY"/>
-      <img :src="require('./assets/gameOver.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.COINS"/>
+      <img :src="require('./assets/gameOverDecisions.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.DECISIONS"/>
+      <img :src="require('./assets/gameOverEnergy.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.ENERGY"/>
+      <img :src="require('./assets/gameOverCosts.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.COINS"/>
       <div class="decision-description">{{ "" }}</div>
     </div>
 
@@ -300,7 +300,7 @@ body {
 .decision-container .decision-image {
   width: 100%;
   border-radius: 10px;
-  height: 380px;
+  height: 320px;
   object-fit: cover;
 }
 
@@ -308,7 +308,7 @@ body {
   width: 100%;
   border-radius: 10px;
   height: 380px;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 #action-container {
