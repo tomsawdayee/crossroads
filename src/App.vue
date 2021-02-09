@@ -5,27 +5,25 @@
                                                                         :style="{ marginLeft: '5px',color: '#631878' }"/></span>
     <span class="stat-item">Coins: {{ user.coins }}<font-awesome-icon :icon="['fas', 'coins']"
                                                                       :style="{ marginLeft: '5px',color: '#D39C2F' }"/></span>
-
-    <ul id="decisions-list">
-      <li v-for="item in decisions" :key="item.id" v-if="item.isVisible">
-        <div class="decision-badge">
-          <div class="cost-wrap">
-            <div v-if="item.cost.energy > 0" class="cost-container">
-              <font-awesome-icon :icon="['fas', 'star']"
-                                 :style="{ marginRight: '2px', color: '#631878' }"/>
-              <span>{{ item.cost.energy }}</span>
-            </div>
-            <div v-if="item.cost.coins > 0" class="cost-container">
-              <font-awesome-icon :icon="['fas', 'coins']"
-                                 :style="{ marginRight: '2px', color: '#D39C2F' }"/>
-              <span>{{ item.cost.coins }}</span>
-            </div>
+    <div class="decision-container">
+      <div class="decision-badge">
+        <div class="cost-wrap">
+          <div v-if="renderedItem.cost.energy > 0" class="cost-container">
+            <font-awesome-icon :icon="['fas', 'star']"
+                               :style="{ marginRight: '2px', color: '#631878' }"/>
+            <span>{{ renderedItem.cost.energy }}</span>
+          </div>
+          <div v-if="renderedItem.cost.coins > 0" class="cost-container">
+            <font-awesome-icon :icon="['fas', 'coins']"
+                               :style="{ marginRight: '2px', color: '#D39C2F' }"/>
+            <span>{{ renderedItem.cost.coins }}</span>
           </div>
         </div>
-        <img :src="require(`${item.imageUrl}`)" class="decision-image"/>
-        <div class="decision-description">{{ item.description }}</div>
-      </li>
-    </ul>
+      </div>
+      <img :src="require(`${renderedItem.imageUrl}`)" class="decision-image"/>
+      <div class="decision-description">{{ renderedItem.description }}</div>
+    </div>
+
     <div id="action-container">
       <button id="reject-button" v-on:click="reject" class="action-button">
         <font-awesome-icon size="3x" :icon="['fas', 'times']" :style="{ color: 'white' }"/>
@@ -43,19 +41,29 @@ export default {
   name: 'App',
   methods: {
     approve: function (event) {
-      alert('approve clicked')
+      let index = this.currentIndex
+      const decision = this.decisions[index]
+      this.user.energy -= decision.cost.energy
+      this.user.coins -= decision.cost.coins
+      this.currentIndex++
     },
     reject: function (event) {
-      alert('reject clicked')
+      this.currentIndex++
     }
   },
-  data() {
+  computed: {
+    renderedItem: function () {
+      let index = this.currentIndex
+      return this.decisions[index]
+    }
+  },
+  data () {
     return {
       user: {energy: 77, coins: 100},
+      currentIndex: 0,
       decisions: [
         {
           id: '1',
-          isVisible: true,
           description: 'Asaf needs help with his homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
           cost: {coins: 2, energy: 4}
@@ -63,9 +71,9 @@ export default {
         {
           id: '2',
           isVisible: false,
-          description: 'Asaf needs help with his homework in math. Would you like to assist?',
-          imageUrl: './assets/Parenting-Help.jpg',
-          cost: {coins: 2, energy: 4}
+          description: 'TEST TEXT',
+          imageUrl: './assets/Grandmother.png',
+          cost: {coins: 10, energy: 15}
         },
         {
           id: '3',
@@ -93,30 +101,29 @@ export default {
   font-size: 17px;
 }
 
-#decisions-list {
+.decision-container {
   list-style-type: none;
   padding: 0px;
-}
-
-#decisions-list li {
   border: 1px solid black;
   padding: 8px;
   border-radius: 5px;
   background: #F7F6F6;
   position: relative;
+  margin-top: 15px;
 }
 
-#decisions-list .decision-description {
+.decision-container .decision-description {
   margin: 20px 0;
 }
 
-#decisions-list .decision-image {
+.decision-container .decision-image {
   width: 100%;
   border-radius: 5px;
 }
 
 #action-container {
   text-align: center;
+  margin-top:15px;
 }
 
 .stat-item {
@@ -157,7 +164,7 @@ export default {
 }
 
 .cost-container {
-  margin-bottom:3px;
+  margin-bottom: 3px;
 }
 
 </style>
