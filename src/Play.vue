@@ -53,18 +53,18 @@
     <div id="action-container" v-if="!this.gameEnded">
       <div>
         <button id="postpone-button" v-on:click="decide('postpone')" class="action-button" v-if="renderedItem.canPostpone">
-        <font-awesome-icon size="3x" :icon="['fas', 'hourglass-half']" :style="{ color: 'white' }" />
-      </button>
+          <font-awesome-icon size="3x" :icon="['fas', 'hourglass-half']" :style="{ color: 'white' }" />
+        </button>
       </div>
       <div>
         <button id="reject-button" v-on:click="decide('no')" class="action-button">
-        <font-awesome-icon size="3x" :icon="['fas', 'times']" :style="{ color: 'white' }"/>
-      </button>
+          <font-awesome-icon size="3x" :icon="['fas', 'times']" :style="{ color: 'white' }"/>
+        </button>
       </div>
       <div>
         <button id="accept-button" v-on:click="decide('yes')" class="action-button">
-        <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
-      </button>
+          <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
+        </button>
       </div>
       <div>
         <!-- future button -->
