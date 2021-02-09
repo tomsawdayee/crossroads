@@ -71,14 +71,11 @@ import Profile from "./views/Profile.vue";
 
 //check enough energy/enough money
 //check an option of delay between decisions
-//add effect in reject/approve
 //greater weights
-//every effect should have minus value too
 //shorter page
 //game over two option image
 //youre too tired in order to continue
 //the decisions for today are over
-//if (enough energy) end game DONE
 //add swipe
 
 export default {
