@@ -242,7 +242,7 @@ export default {
         {
           id: "3",
           description: "A group of friends from your neighborhood are going to clean the park for an hour or two. Would you like to join?",
-          imageUrl: './assets/cleanPark.png',
+          imageUrl: './assets/cleanPark.jpg',
           cost: {energy: 35, coins: 0},
           effect: {
             approved: { relationships: 5, health: 0, leadership: 0, happiness: 2, intelligence: 0 },
