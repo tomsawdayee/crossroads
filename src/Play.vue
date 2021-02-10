@@ -14,7 +14,7 @@
         <h3 class="header-sub-title">Round #1</h3>
       </div>
       <div class="profile-wrap">
-        <img :src="require('./assets/asaf.png')" width="60px" id="profile-image"/>
+        <img :src="require('./assets/profile.png')" width="60px" id="profile-image"/>
         <span class="stat-wrap">
           <span class="stat-item">{{ this.user.energy.value - this.user.energy.delta }}<font-awesome-icon :icon="['fas', 'star']"
                                                                       :style="{ marginLeft: '5px',color: '#631878' }"/></span>
