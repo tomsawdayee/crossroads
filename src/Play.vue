@@ -257,6 +257,46 @@ export default {
             approved: { intelligence: 10, happiness: 1, relationships: 2 },
             rejected: {}
           }
+        },
+        {
+          id: '8',
+          description: 'Would you like to go hiking?',
+          imageUrl: './assets/sunset.jpg',
+          cost: {coins: 1, energy: 15},
+          effect: {
+            approved: { intelligence: 1, happiness: 10, relationships: 1 },
+            rejected: {}
+          }
+        },
+        {
+          id: '9',
+          description: 'Maybe play soccer with friends?',
+          imageUrl: './assets/soccer.jpg',
+          cost: {coins: 1, energy: 15},
+          effect: {
+            approved: { intelligence: 1, happiness: 10, relationships: 2 },
+            rejected: {}
+          }
+        },
+        {
+          id: '10',
+          description: 'Break your latest recorded in your favorite game console?',
+          imageUrl: './assets/xbox.jpg',
+          cost: {coins: 1, energy: 15},
+          effect: {
+            approved: { intelligence: 1, happiness: 10, relationships: 2 },
+            rejected: {}
+          }
+        },
+        {
+          id: '11',
+          description: 'Any chance you decide to do homework?',
+          imageUrl: './assets/xbox.jpg',
+          cost: {coins: 1, energy: 15},
+          effect: {
+            approved: { intelligence: 1, happiness: 10, relationships: 2 },
+            rejected: {}
+          }
         }
       ]
     }

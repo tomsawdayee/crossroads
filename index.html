@@ -6,33 +6,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.css">
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
-
     <title>Crossroads</title>
   </head>
-
-  <script>
-    $(function(){
-
-      // Bind the swipeleftHandler callback function to the swipe event on div.box
-      $( "#app" ).on( "swipeleft", swipeleftHandler );
-      $( "#app" ).on( "swiperight", swiperightHandler );
-
-      // Callback function references the event target and adds the 'swipeleft' class to it
-      function swipeleftHandler( event ){
-        console.log("swipe left called");
-        $( "#reject-button" ).click();
-      }
-
-      function swiperightHandler( event ){
-        console.log("swipe right called");
-        $( "#accept-button" ).click();
-      }
-
-    });
-  </script>
 
   <body>
     <div id="app"></div>
