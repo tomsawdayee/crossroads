@@ -480,7 +480,6 @@ body {
   z-index: 1;
   top: 55%;
   height: 80px;
-  opacity: 75%;
 }
 
 .nope-pointer {
