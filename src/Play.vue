@@ -322,7 +322,7 @@ html, body {
 }
 
 body {
-  padding: 0 10px;
+  padding: 0 10px 10px 10px;
 }
 .decision-container {
   list-style-type: none;
@@ -480,6 +480,7 @@ body {
   z-index: 1;
   top: 55%;
   height: 80px;
+  opacity: 75%;
 }
 
 .nope-pointer {
