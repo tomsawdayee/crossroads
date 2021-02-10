@@ -24,24 +24,31 @@
       </div>
     </div>
 
-    <div class="decision-container" v-if="!this.gameEnded">
-      <div class="decision-badge">
-        <div class="cost-wrap">
-          <div v-if="renderedItem.cost.energy" class="cost-container">
-            <font-awesome-icon :icon="['fas', 'star']"
-                               :style="{ marginRight: '2px', color: '#631878' }"/>
-            <span>{{ renderedItem.cost.energy }}</span>
+    <Tinder ref="tinder" key-name="id" :queue.sync="queue" @submit="onSubmit" v-if="!this.gameEnded">
+      <template slot-scope="{data}">
+        <div class="decision-container" >
+          <div class="decision-badge">
+            <div class="cost-wrap">
+              <div v-if="data.cost.energy" class="cost-container">
+                <font-awesome-icon :icon="['fas', 'star']"
+                                   :style="{ marginRight: '2px', color: '#631878' }"/>
+                <span>{{ data.cost.energy }}</span>
+              </div>
+              <div v-if="data.cost.coins" class="cost-container">
+                <font-awesome-icon :icon="['fas', 'coins']"
+                                   :style="{ marginRight: '2px', color: '#D39C2F' }"/>
+                <span>{{ data.cost.coins }}</span>
+              </div>
+            </div>
           </div>
-          <div v-if="renderedItem.cost.coins" class="cost-container">
-            <font-awesome-icon :icon="['fas', 'coins']"
-                               :style="{ marginRight: '2px', color: '#D39C2F' }"/>
-            <span>{{ renderedItem.cost.coins }}</span>
-          </div>
+          <img :src="require(`${data.imageUrl}`)" class="decision-image"/>
+          <div class="decision-description">{{ data.description }}</div>
         </div>
-      </div>
-      <img :src="require(`${renderedItem.imageUrl}`)" class="decision-image"/>
-      <div class="decision-description">{{ renderedItem.description }}</div>
-    </div>
+      </template>
+
+      <img class="like-pointer" slot="like"  src="./assets/yes_stamp.png">
+      <img class="nope-pointer" slot="nope"  src="./assets/no_stamp.png">
+    </Tinder>
 
     <div class="game-over" v-if="this.gameEnded && !this.showProfile">
       <img :src="require('./assets/gameOverDecisions.jpg')" class="game-over" v-on:click="gameOver" v-if="this.reasonForEnd === this.reasonForEndOptions.DECISIONS"/>
@@ -52,22 +59,19 @@
 
     <div id="action-container" v-if="!this.gameEnded">
       <div>
-        <button id="postpone-button" v-on:click="decide('postpone')" class="action-button" v-if="renderedItem.canPostpone">
+        <button id="postpone-button" v-on:click="submitQuestion('postpone')" class="action-button" v-if="renderedItem.canPostpone">
           <font-awesome-icon size="3x" :icon="['fas', 'hourglass-half']" :style="{ color: 'white' }" />
         </button>
       </div>
       <div>
-        <button id="reject-button" v-on:click="decide('no')" class="action-button">
+        <button id="reject-button" v-on:click="submitQuestion('no')" class="action-button">
           <font-awesome-icon size="3x" :icon="['fas', 'times']" :style="{ color: 'white' }"/>
         </button>
       </div>
       <div>
-        <button id="accept-button" v-on:click="decide('yes')" class="action-button">
+        <button id="accept-button" v-on:click="submitQuestion('yes')" class="action-button">
           <font-awesome-icon size="3x" :icon="['fas', 'check']" :style="{ color: 'white' }"/>
         </button>
-      </div>
-      <div>
-        <!-- future button -->
       </div>
     </div>
 
@@ -77,16 +81,32 @@
 
 <script>
 import Profile from "./views/Profile.vue";
-
+import Tinder from 'vue-tinder'
 //check an option of delay between decisions
 //greater weights
 //add swipe
 
 export default {
   name: 'Play',
-  components: {Profile},
+  components: {Profile, Tinder},
   methods: {
-    decide: function (answer) {
+    onSubmit(type, key, item) {
+      if (type.type === "like") {
+        this.decide("yes");
+      } else {
+        this.decide("no");
+      }
+    },
+
+    submitQuestion: function (answer) {
+      if (answer === "yes") {
+        this.$refs.tinder.decide("like");
+      } else {
+        this.$refs.tinder.decide("nope");
+      }
+    },
+    decide: function (answer)
+    {
       if (answer !== 'postpone') {
         this.processDecision(answer);
       }
@@ -154,6 +174,9 @@ export default {
     },
     gameOver: function (event) {
       this.showProfile = true
+    },
+    getData () {
+      this.queue = Array.from(this.decisions);
     }
   },
   computed: {
@@ -161,6 +184,9 @@ export default {
       let index = this.currentIndex
       return this.decisions[index]
     }
+  },
+  created() {
+    this.getData()
   },
   mounted () {
     setTimeout(() => {
@@ -175,6 +201,9 @@ export default {
 
   data () {
     return {
+      queue: [],
+      offset: 0,
+      history: [],
       showSplash: true,
       user: {energy:  {value: 100, delta:0} , coins: {value: 20, delta:0}, health: {value: 20, delta:0}, relationships: {value: 0, delta:0}, intelligence: {value: 0, delta:0}, leadership: {value: 0, delta:0}, happiness: {value: 20, delta:0}, revenues: 0},
       currentIndex: 0,
@@ -188,7 +217,7 @@ export default {
       },
       decisions: [
         {
-          id: '1',
+          id: '0',
           description: 'Sara asked from you to help with homework in math. Would you like to assist?',
           imageUrl: './assets/Parenting-Help.jpg',
           cost: {energy: 7},
@@ -198,7 +227,7 @@ export default {
           }
         },
         {
-          id: '2',
+          id: '1',
           description: 'Would you like to open a Lemonade stand?',
           canPostpone: true,
           imageUrl: './assets/lemonadeStand.jpg',
@@ -209,7 +238,7 @@ export default {
           }
         },
         {
-          id: '3',
+          id: '2',
           description: 'Your Grandmother is sick. Would you like to visit her?',
           imageUrl: './assets/Grandmother.png',
           cost: {energy: 5},
@@ -219,7 +248,7 @@ export default {
           }
         },
         {
-          id: '4',
+          id: '3',
           description: 'Would you like to gather a team of friends and clean the city beach?',
           imageUrl: './assets/cleanBeach.jpg',
           cost: {energy: 10},
@@ -229,7 +258,7 @@ export default {
           }
         },
         {
-          id: '5',
+          id: '4',
           description: 'Would you like to go out for a short jogging?',
           imageUrl: './assets/GoJogging.jpg',
           cost: {energy: 10},
@@ -239,7 +268,7 @@ export default {
           }
         },
         {
-          id: '6',
+          id: '5',
           description: 'Would you like to do meditation?',
           imageUrl: './assets/doMeditation.jpg',
           cost: {energy: 2},
@@ -249,7 +278,7 @@ export default {
           }
         },
         {
-          id: '7',
+          id: '6',
           description: 'How about going to the university?',
           imageUrl: './assets/GoToUniversity.jpg',
           cost: {coins: 1, energy: 15},
@@ -319,7 +348,6 @@ body {
   border-radius: 10px;
   background: #F7F6F6;
   position: relative;
-  margin-top: 25px;
   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
 
@@ -345,6 +373,7 @@ body {
   border-radius: 10px;
   height: 380px;
   object-fit: fill;
+  margin-top: 20px;
 }
 
 #action-container {
@@ -442,7 +471,7 @@ body {
 }
 
 .splash {
-  z-index: 1;
+  z-index: 200;
 }
 
 .header-title {
@@ -453,5 +482,29 @@ body {
 .header-sub-title {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.vue-tinder {
+  margin-top: 25px;
+  height: 450px;
+}
+
+.tinder-card{
+  overflow: visible !important;
+}
+
+.nope-pointer,
+.like-pointer {
+  position: absolute;
+  z-index: 1;
+  top: 55%;
+  height: 80px;
+}
+
+.nope-pointer {
+  right: 10px;
+}
+
+.like-pointer {
+  left: 10px;
 }
 </style>

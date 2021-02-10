@@ -7,6 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faCheck, faTimes, faStar, faCoins, faHeartbeat, faBrain, faUsers, faHourglassHalf} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueSplash from 'vue-splash';
+import VueTinder from 'vue-tinder'
 
 library.add(faUserSecret)
 library.add(faCheck)
@@ -20,6 +21,7 @@ library.add(faHourglassHalf)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueSplash);
+Vue.use(VueTinder)
 
 Vue.config.productionTip = false
 
