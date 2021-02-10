@@ -134,6 +134,8 @@ export default {
         this.user.coins.delta -= this.user.revenues;
         window.qualities = this.user;
       }
+
+      this.queue = Array.from([this.decisions[nextIndex]]);
     },
     processDecision(answer) {
       const decision = this.decisions[this.currentIndex];
@@ -176,7 +178,7 @@ export default {
       this.showProfile = true
     },
     getData () {
-      this.queue = Array.from(this.decisions);
+      this.queue = Array.from([this.decisions[0]]);
     }
   },
   computed: {
@@ -217,114 +219,94 @@ export default {
       },
       decisions: [
         {
-          id: '0',
-          description: 'Sara asked from you to help with homework in math. Would you like to assist?',
-          imageUrl: './assets/Parenting-Help.jpg',
-          cost: {energy: 7},
+          id: "1",
+          description: "It's a sunny day outside and you have just arrived from school. Would you like to play XBOX?",
+          imageUrl: './assets/xbox.jpg',
+          cost: {energy: 10, coins: 0},
           effect: {
-            approved: { relationships: 3, health: -1 },
-            rejected: { relationships: -3 }
+            approved: { relationships: 0, health: -1, leadership: 0, happiness: 1, intelligence: 1 },
+            rejected: { relationships: 0, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
           }
         },
         {
-          id: '1',
-          description: 'Would you like to open a Lemonade stand?',
+          id: "2",
+          description: "You didn't call your grandmother for a while. Would you like to give her a call?",
           canPostpone: true,
+          imageUrl: './assets/telephone.jpg',
+          cost: {energy: 5, coins: 0},
+          effect: {
+            approved: { relationships: 2, health: 0, leadership: 0, happiness: 1, intelligence: 0 },
+            rejected: { relationships: -2, health: 0, leadership: 0, happiness: 0, intelligence: 0 }
+          }
+        },
+        {
+          id: "3",
+          description: "A group of friends from your neighborhood are going to clean the park for an hour or two. Would you like to join?",
+          imageUrl: './assets/cleanPark.png',
+          cost: {energy: 35, coins: 0},
+          effect: {
+            approved: { relationships: 5, health: 0, leadership: 0, happiness: 2, intelligence: 0 },
+            rejected: { relationships: 0, health: 0, leadership: 0, happiness: 0, intelligence: 0 }
+          }
+        },
+        {
+          id: "4",
+          description: "You see a wandering dog with a collar. Will you make the effort to find its owners?",
+          imageUrl: './assets/dog.jpg',
+          cost: {energy: 15, coins: 0},
+          effect: {
+            approved: { relationships: 0, health: 0, leadership: 0, happiness: 1, intelligence: 0 },
+            rejected: { relationships: 0, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
+          }
+        },
+        {
+          id: "5",
+          description: "The friends that you cleaned the park with want to go bowling. Would you like to join them?",
+          imageUrl: './assets/bowling.jpg',
+          cost: {energy: 20, coins: 15},
+          effect: {
+            approved: { relationships: 4, health: 3, leadership: 0, happiness: 2, intelligence: 0 },
+            rejected: { relationships: 0, health: -5, leadership: 1, happiness: 0, intelligence: 0 }
+          }
+        },
+        {
+          id: "6",
+          description: "Would you like to try and break the record in your favorite XBOX game?",
+          imageUrl: './assets/xbox.jpg',
+          cost: {energy: 10, coins: 0},
+          effect: {
+            approved: { relationships: 0, health: -3, leadership: 0, happiness: 1, intelligence: 1 },
+            rejected: { relationships: 0, health: 0, leadership: 2, happiness: -1, intelligence: 0 }
+          }
+        },
+        {
+          id: "7",
+          description: "It got really hot outside today. People could really use a cold drink. Would you like to open a lemonade stand?",
           imageUrl: './assets/lemonadeStand.jpg',
-          cost: {coins: 10, energy: 20},
+          cost: {energy: 20, coins: 10},
           effect: {
-            approved: { leadership: 2, coins: 20 },
-            rejected: {}
+            approved: { relationships: 0, health: 0, leadership: 5, happiness: 0, intelligence: 2, coins: 3 },
+            rejected: { relationships: 0, health: 0, leadership: 0, happiness: 0, intelligence: 0 }
           }
         },
         {
-          id: '2',
-          description: 'Your Grandmother is sick. Would you like to visit her?',
+          id: "8",
+          description: "It got cloudy outside. Do you want to complete your math homework?",
+          imageUrl: './assets/Parenting-Help.jpg',
+          cost: {energy: 10, coins: 0},
+          effect: {
+            approved: { relationships: -5, health: -1, leadership: 0, happiness: -2, intelligence: 10 },
+            rejected: { relationships: 0, health: 0, leadership: 0, happiness: 3, intelligence: -3 }
+          }
+        },
+        {
+          id: "9",
+          description: "Your grandmother misses you. You didn't even call her. Maybe visit her?",
           imageUrl: './assets/Grandmother.png',
-          cost: {energy: 5},
+          cost: {energy: 15, coins: 0},
           effect: {
-            approved: { relationships: 2, happiness: 2 },
-            rejected: {}
-          }
-        },
-        {
-          id: '3',
-          description: 'Would you like to gather a team of friends and clean the city beach?',
-          imageUrl: './assets/cleanBeach.jpg',
-          cost: {energy: 10},
-          effect: {
-            approved: { leadership: 3, happiness: 1 },
-            rejected: {}
-          }
-        },
-        {
-          id: '4',
-          description: 'Would you like to go out for a short jogging?',
-          imageUrl: './assets/GoJogging.jpg',
-          cost: {energy: 10},
-          effect: {
-            approved: { health: 3 },
-            rejected: {}
-          }
-        },
-        {
-          id: '5',
-          description: 'Would you like to do meditation?',
-          imageUrl: './assets/doMeditation.jpg',
-          cost: {energy: 2},
-          effect: {
-            approved: { health: 3, happiness: 3 },
-            rejected: {}
-          }
-        },
-        {
-          id: '6',
-          description: 'How about going to the university?',
-          imageUrl: './assets/GoToUniversity.jpg',
-          cost: {coins: 1, energy: 15},
-          effect: {
-            approved: { intelligence: 10, happiness: 1, relationships: 2 },
-            rejected: {}
-          }
-        },
-        {
-          id: '8',
-          description: 'Would you like to go hiking?',
-          imageUrl: './assets/sunset.jpg',
-          cost: {coins: 1, energy: 15},
-          effect: {
-            approved: { intelligence: 1, happiness: 10, relationships: 1 },
-            rejected: {}
-          }
-        },
-        {
-          id: '9',
-          description: 'Maybe play soccer with friends?',
-          imageUrl: './assets/soccer.jpg',
-          cost: {coins: 1, energy: 15},
-          effect: {
-            approved: { intelligence: 1, happiness: 10, relationships: 2 },
-            rejected: {}
-          }
-        },
-        {
-          id: '10',
-          description: 'Break your latest recorded in your favorite game console?',
-          imageUrl: './assets/xbox.jpg',
-          cost: {coins: 1, energy: 15},
-          effect: {
-            approved: { intelligence: 1, happiness: 10, relationships: 2 },
-            rejected: {}
-          }
-        },
-        {
-          id: '11',
-          description: 'Any chance you decide to do homework?',
-          imageUrl: './assets/xbox.jpg',
-          cost: {coins: 1, energy: 15},
-          effect: {
-            approved: { intelligence: 1, happiness: 10, relationships: 2 },
-            rejected: {}
+            approved: { relationships: 1, health: 0, leadership: 0, happiness: 1, intelligence: 0, coins: 5 },
+            rejected: { relationships: -5, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
           }
         }
       ]
