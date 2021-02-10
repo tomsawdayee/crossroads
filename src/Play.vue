@@ -314,7 +314,7 @@
             imageUrl: './assets/dinner.jpg',
             cost: {energy: 15, coins: 10},
             effect: {
-              approved: { relationships: 3, health: 0, leadership: 1, happiness: 1, intelligence: 0, coins: 5 },
+              approved: { relationships: 3, health: 0, leadership: 1, happiness: 1, intelligence: 0, coins: 0 },
               rejected: { relationships: -5, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -324,7 +324,7 @@
             imageUrl: './assets/readBook.jpg',
             cost: {energy: 15, coins: 5},
             effect: {
-              approved: { relationships: 0, health: 0, leadership: 0, happiness: 1, intelligence: 5, coins: 5 },
+              approved: { relationships: 0, health: 0, leadership: 0, happiness: 1, intelligence: 5, coins: 0 },
               rejected: { relationships: 0, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -334,7 +334,7 @@
             imageUrl: './assets/cleanRoom.jpg',
             cost: {energy: 15, coins: 0},
             effect: {
-              approved: {relationships: 1, health: 1, leadership: 0, happiness: 1, intelligence: 0, coins: 5},
+              approved: {relationships: 1, health: 1, leadership: 0, happiness: 1, intelligence: 0, coins: 0},
               rejected: {relationships: 0, health: -1, leadership: 0, happiness: -2, intelligence: 0}
             }
           },
@@ -344,7 +344,7 @@
             imageUrl: './assets/playFlute.jpg',
             cost: {energy: 15, coins: 10},
             effect: {
-              approved: { relationships: 1, health: 0, leadership: 0, happiness: 1, intelligence: 5, coins: 5 },
+              approved: { relationships: 1, health: 0, leadership: 0, happiness: 1, intelligence: 5, coins: 0 },
               rejected: { relationships: -1, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -354,7 +354,7 @@
             imageUrl: './assets/learnLanguage.jpg',
             cost: {energy: 15, coins: 10},
             effect: {
-              approved: { relationships: 1, health: 0, leadership: 0, happiness: 1, intelligence: 5, coins: 5 },
+              approved: { relationships: 1, health: 0, leadership: 0, happiness: 1, intelligence: 5, coins: 0 },
               rejected: { relationships: -1, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -364,7 +364,7 @@
             imageUrl: './assets/bakeCookies.jpeg',
             cost: {energy: 15, coins: 10},
             effect: {
-              approved: { relationships: 1, health: 1, leadership: 0, happiness: 1, intelligence: 3, coins: 5 },
+              approved: { relationships: 1, health: 1, leadership: 0, happiness: 1, intelligence: 3, coins: 3 },
               rejected: { relationships: -5, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -374,7 +374,7 @@
             imageUrl: './assets/socialActivity.jpeg',
             cost: {energy: 15, coins: 5},
             effect: {
-              approved: { relationships: 5, health: 5, leadership: 0, happiness: 5, intelligence: 0, coins: 5 },
+              approved: { relationships: 5, health: 5, leadership: 0, happiness: 5, intelligence: 0, coins: 0 },
               rejected: { relationships: -5, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -384,7 +384,7 @@
             imageUrl: './assets/newSport.jpg',
             cost: {energy: 15, coins: 5},
             effect: {
-              approved: { relationships: 3, health: 3, leadership: 0, happiness: 3, intelligence: 3, coins: 5 },
+              approved: { relationships: 3, health: 3, leadership: 0, happiness: 3, intelligence: 3, coins: 0 },
               rejected: { relationships: -3, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -394,7 +394,7 @@
             imageUrl: './assets/makePost.jpg',
             cost: {energy: 5, coins: 0},
             effect: {
-              approved: { relationships: 5, health: 1, leadership: 0, happiness: 3, intelligence: 0, coins: 5 },
+              approved: { relationships: 5, health: 1, leadership: 0, happiness: 3, intelligence: 0, coins: 0 },
               rejected: { relationships: -5, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -404,7 +404,7 @@
             imageUrl: './assets/newArt.jpg',
             cost: {energy: 15, coins: 5},
             effect: {
-              approved: { relationships: 1, health: 2, leadership: 0, happiness: 3, intelligence: 5, coins: 5 },
+              approved: { relationships: 1, health: 2, leadership: 0, happiness: 3, intelligence: 5, coins: 0 },
               rejected: { relationships: -1, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           },
@@ -414,7 +414,7 @@
             imageUrl: './assets/slumberParty.jpg',
             cost: {energy: 10, coins: 5},
             effect: {
-              approved: { relationships: 5, health: 2, leadership: 5, happiness: 3, intelligence: 0, coins: 5 },
+              approved: { relationships: 5, health: 2, leadership: 5, happiness: 3, intelligence: 0, coins: 0 },
               rejected: { relationships: -5, health: 0, leadership: 0, happiness: -2, intelligence: 0 }
             }
           }
